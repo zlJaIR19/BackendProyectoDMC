@@ -14,21 +14,22 @@ import { Orden } from './entities/orden.entity';
 import { DetalleOrden } from './entities/detalle-orden.entity';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: '1919',
-    database: 'tienda',
-    entities: [Usuario, Categoria, Producto, Orden, DetalleOrden],
-    synchronize: false,
-  }),
-  UsuariosModule,
-  CategoriasModule,
-  ProductosModule,
-  OrdenesModule,
-  DetalleOrdenModule,
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: '1919',
+      database: 'tienda',
+      entities: [Usuario, Categoria, Producto, Orden, DetalleOrden],
+      synchronize: false,
+    }),
+    UsuariosModule,
+    CategoriasModule,
+    ProductosModule,
+    OrdenesModule,
+    DetalleOrdenModule,
   ],
   controllers: [AppController],
   providers: [AppService],
