@@ -15,7 +15,7 @@ export class CategoriasService {
       ...createCategoriaDto,
       fecha_creacion: new Date(),
     });
-    return this.categoriasRepository.save(categoria);
+    return this.categoriasRepository.save(categoria) as unknown as Promise<Categoria>;
   }
 
   async findAll(): Promise<Categoria[]> {
@@ -32,8 +32,8 @@ export class CategoriasService {
 
   async update(id: number, updateCategoriaDto: any): Promise<Categoria> {
     const categoria = await this.findOne(id);
-    this.categoriasRepository.merge(categoria, updateCategoriaDto);
-    return this.categoriasRepository.save(categoria);
+    const updatedCategoria = this.categoriasRepository.merge(categoria, updateCategoriaDto);
+    return this.categoriasRepository.save(updatedCategoria) as unknown as Promise<Categoria>;
   }
 
   async remove(id: number): Promise<void> {

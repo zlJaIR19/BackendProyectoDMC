@@ -12,7 +12,7 @@ export class UsuariosService {
 
   async create(createUsuarioDto: any): Promise<Usuario> {
     const usuario = this.usuariosRepository.create(createUsuarioDto);
-    return this.usuariosRepository.save(usuario);
+    return this.usuariosRepository.save(usuario) as unknown as Promise<Usuario>;
   }
 
   async findAll(): Promise<Usuario[]> {
@@ -30,7 +30,7 @@ export class UsuariosService {
   async update(id: number, updateUsuarioDto: any): Promise<Usuario> {
     const usuario = await this.findOne(id);
     this.usuariosRepository.merge(usuario, updateUsuarioDto);
-    return this.usuariosRepository.save(usuario);
+    return this.usuariosRepository.save(usuario) as unknown as Promise<Usuario>;
   }
 
   async remove(id: number): Promise<void> {

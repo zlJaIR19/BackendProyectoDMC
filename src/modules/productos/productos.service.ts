@@ -15,7 +15,7 @@ export class ProductosService {
       ...createProductoDto,
       fecha_creacion: new Date(),
     });
-    return this.productosRepository.save(producto);
+    return this.productosRepository.save(producto) as unknown as Promise<Producto>;
   }
 
   async findAll(categoriaId?: number): Promise<Producto[]> {
@@ -44,7 +44,7 @@ export class ProductosService {
   async update(id: number, updateProductoDto: any): Promise<Producto> {
     const producto = await this.findOne(id);
     this.productosRepository.merge(producto, updateProductoDto);
-    return this.productosRepository.save(producto);
+    return this.productosRepository.save(producto) as unknown as Promise<Producto>;
   }
 
   async remove(id: number): Promise<void> {

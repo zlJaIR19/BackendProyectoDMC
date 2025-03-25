@@ -15,7 +15,7 @@ export class OrdenesService {
       ...createOrdenDto,
       fecha_pedido: new Date(),
     });
-    return this.ordenesRepository.save(orden);
+    return this.ordenesRepository.save(orden) as unknown as Promise<Orden>;
   }
 
   async findAll(usuarioId?: number): Promise<Orden[]> {
@@ -46,7 +46,7 @@ export class OrdenesService {
   async update(id: number, updateOrdenDto: any): Promise<Orden> {
     const orden = await this.findOne(id);
     this.ordenesRepository.merge(orden, updateOrdenDto);
-    return this.ordenesRepository.save(orden);
+    return this.ordenesRepository.save(orden) as unknown as Promise<Orden>;
   }
 
   async remove(id: number): Promise<void> {

@@ -12,7 +12,7 @@ export class DetalleOrdenService {
 
   async create(createDetalleOrdenDto: any): Promise<DetalleOrden> {
     const detalleOrden = this.detalleOrdenRepository.create(createDetalleOrdenDto);
-    return this.detalleOrdenRepository.save(detalleOrden);
+    return this.detalleOrdenRepository.save(detalleOrden) as unknown as Promise<DetalleOrden>;
   }
 
   async findAll(ordenId?: number): Promise<DetalleOrden[]> {
@@ -43,7 +43,7 @@ export class DetalleOrdenService {
   async update(id: number, updateDetalleOrdenDto: any): Promise<DetalleOrden> {
     const detalleOrden = await this.findOne(id);
     this.detalleOrdenRepository.merge(detalleOrden, updateDetalleOrdenDto);
-    return this.detalleOrdenRepository.save(detalleOrden);
+    return this.detalleOrdenRepository.save(detalleOrden) as unknown as Promise<DetalleOrden>;
   }
 
   async remove(id: number): Promise<void> {
