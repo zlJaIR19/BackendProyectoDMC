@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
@@ -15,15 +16,27 @@ import { DetalleOrden } from './entities/detalle-orden.entity';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '1919',
-      database: 'tienda',
+      ...(process.env.DATABASE_URL
+        ? {
+            url: process.env.DATABASE_URL,
+            ssl: process.env.NODE_ENV === 'production' 
+              ? { rejectUnauthorized: false } 
+              : false,
+          }
+        : {
+            host: process.env.DATABASE_HOST || 'localhost',
+            port: parseInt(process.env.DATABASE_PORT || '5432'),
+            username: process.env.DATABASE_USERNAME || 'postgres',
+            password: process.env.DATABASE_PASSWORD || '1919',
+            database: process.env.DATABASE_NAME || 'tienda',
+          }),
       entities: [Usuario, Categoria, Producto, Orden, DetalleOrden],
-      synchronize: false,
+      synchronize: process.env.NODE_ENV !== 'production',
     }),
     UsuariosModule,
     CategoriasModule,
