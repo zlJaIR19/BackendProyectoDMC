@@ -36,7 +36,7 @@ import { DetalleOrden } from './entities/detalle-orden.entity';
             database: process.env.DATABASE_NAME || 'tienda',
           }),
       entities: [Usuario, Categoria, Producto, Orden, DetalleOrden],
-      synchronize: process.env.NODE_ENV !== 'production',
+      synchronize: true, 
     }),
     UsuariosModule,
     CategoriasModule,
