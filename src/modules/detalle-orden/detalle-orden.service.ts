@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { DetalleOrden } from '../../entities/detalle-orden.entity';
+import { CreateDetalleOrdenDto } from './dto/create-detalle-orden.dto';
+import { UpdateDetalleOrdenDto } from './dto/update-detalle-orden.dto';
 
 @Injectable()
 export class DetalleOrdenService {
@@ -10,9 +12,9 @@ export class DetalleOrdenService {
     private detalleOrdenRepository: Repository<DetalleOrden>,
   ) {}
 
-  async create(createDetalleOrdenDto: any): Promise<DetalleOrden> {
+  async create(createDetalleOrdenDto: CreateDetalleOrdenDto): Promise<DetalleOrden> {
     const detalleOrden = this.detalleOrdenRepository.create(createDetalleOrdenDto);
-    return this.detalleOrdenRepository.save(detalleOrden) as unknown as Promise<DetalleOrden>;
+    return this.detalleOrdenRepository.save(detalleOrden);
   }
 
   async findAll(ordenId?: number): Promise<DetalleOrden[]> {
@@ -40,10 +42,10 @@ export class DetalleOrdenService {
     return detalleOrden;
   }
 
-  async update(id: number, updateDetalleOrdenDto: any): Promise<DetalleOrden> {
+  async update(id: number, updateDetalleOrdenDto: UpdateDetalleOrdenDto): Promise<DetalleOrden> {
     const detalleOrden = await this.findOne(id);
     this.detalleOrdenRepository.merge(detalleOrden, updateDetalleOrdenDto);
-    return this.detalleOrdenRepository.save(detalleOrden) as unknown as Promise<DetalleOrden>;
+    return this.detalleOrdenRepository.save(detalleOrden);
   }
 
   async remove(id: number): Promise<void> {
