@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Orden } from '../../entities/orden.entity';
@@ -61,7 +61,40 @@ export class OrdenesService {
   }
 
   async createDetalleOrden(createDetalleOrdenDto: DetalleOrdenDto): Promise<DetalleOrden> {
-    const detalleOrden = this.detalleOrdenRepository.create(createDetalleOrdenDto);
-    return this.detalleOrdenRepository.save(detalleOrden);
+    console.log('Servicio - Creando detalle de orden:', JSON.stringify(createDetalleOrdenDto, null, 2));
+    
+    // Verificar que todos los campos necesarios estén presentes
+    if (!createDetalleOrdenDto.cantidad) {
+      throw new BadRequestException('El campo cantidad es obligatorio');
+    }
+    
+    if (!createDetalleOrdenDto.precio_unitario) {
+      throw new BadRequestException('El campo precio_unitario es obligatorio');
+    }
+    
+    if (!createDetalleOrdenDto.ordenId) {
+      throw new BadRequestException('El campo ordenId es obligatorio');
+    }
+    
+    if (!createDetalleOrdenDto.productoId) {
+      throw new BadRequestException('El campo productoId es obligatorio');
+    }
+    
+    // Si no se proporcionó subtotal, calcularlo
+    if (!createDetalleOrdenDto.subtotal) {
+      createDetalleOrdenDto.subtotal = createDetalleOrdenDto.cantidad * createDetalleOrdenDto.precio_unitario;
+    }
+    
+    try {
+      const detalleOrden = this.detalleOrdenRepository.create(createDetalleOrdenDto);
+      console.log('Servicio - Detalle de orden creado:', JSON.stringify(detalleOrden, null, 2));
+      const resultado = await this.detalleOrdenRepository.save(detalleOrden);
+      console.log('Servicio - Detalle de orden guardado:', JSON.stringify(resultado, null, 2));
+      return resultado;
+    } catch (error) {
+      console.error('Servicio - Error al guardar detalle de orden:', error.message);
+      console.error('Stack:', error.stack);
+      throw new BadRequestException(`Error al crear detalle de orden: ${error.message}`);
+    }
   }
 }
