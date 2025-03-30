@@ -25,10 +25,9 @@ export class OrdenesController {
       
       // Ahora crear los detalles asociados a esta orden
       for (const detalle of detallesOrden) {
-        // No enviamos el subtotal ya que es una columna generada
-        const { subtotal, ...detalleData } = detalle;
+        // Incluimos el subtotal ya que es un campo obligatorio en la entidad
         await this.ordenesService.createDetalleOrden({
-          ...detalleData,
+          ...detalle,
           ordenId: orden.id
         });
       }
