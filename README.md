@@ -1,98 +1,139 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Cafetea Perú - Aplicación Web
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descripción del Proyecto
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Cafetea Perú es una aplicación web completa para la gestión y venta de productos de café peruano. La plataforma permite a los clientes explorar y comprar productos, mientras que los administradores pueden gestionar productos y órdenes a través de un panel de administración dedicado.
 
-## Description
+## Arquitectura
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+El proyecto está construido con una arquitectura de tres capas:
 
-## Project setup
+1. **Frontend**: Aplicación Angular con Tailwind CSS
+2. **Backend**: API RESTful desarrollada con NestJS
+3. **Base de Datos**: PostgreSQL alojada en Render
 
-```bash
-$ npm install
+![Arquitectura del Proyecto](./docs/arquitectura.png)
+
+## Tecnologías Utilizadas
+
+### Frontend
+- Angular 19
+- Tailwind CSS 4
+- TypeScript
+- RxJS
+
+### Backend
+- NestJS
+- TypeORM
+- JWT para autenticación
+- PostgreSQL como base de datos
+
+### Despliegue
+- Render para hosting del frontend, backend y base de datos PostgreSQL
+
+## Funcionalidades Principales
+
+### Para Clientes
+- Explorar catálogo de productos de café
+- Buscar productos por nombre o categoría
+- Realizar pedidos directamente
+- Ver confirmación de compra
+
+### Para Administradores
+- Panel de administración completo
+- Gestión de productos (crear, editar, eliminar)
+- Visualización y gestión de órdenes
+- Actualización del estado de las órdenes
+
+## Estructura del Proyecto
+
+```
+ProyectoFront/
+├── Frontend/             # Aplicación Angular
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── core/     # Servicios principales, guards, interceptors
+│   │   │   ├── features/ # Componentes específicos por funcionalidad
+│   │   │   ├── shared/   # Componentes, modelos y utilidades compartidas
+│   │   ├── assets/       # Imágenes y recursos estáticos
+│   │   └── environments/ # Configuraciones por entorno
+│   └── ...
+└── backend/              # API NestJS
+    ├── src/
+    │   ├── controllers/  # Controladores de la API
+    │   ├── entities/     # Entidades y modelos de datos
+    │   ├── services/     # Servicios de negocio
+    │   └── ...
+    └── ...
 ```
 
-## Compile and run the project
+## Instalación y Configuración Local
 
-```bash
-# development
-$ npm run start
+### Requisitos Previos
+- Node.js (v18 o superior)
+- npm o yarn
+- PostgreSQL (local o remoto)
 
-# watch mode
-$ npm run start:dev
+### Pasos para Instalación Local
 
-# production mode
-$ npm run start:prod
-```
+1. **Clonar el repositorio**
+   ```bash
+   git clone <url-del-repositorio>
+   cd ProyectoFront
+   ```
 
-## Run tests
+2. **Configurar el Backend**
+   ```bash
+   cd backend
+   npm install
+   # Configurar archivo .env con credenciales de base de datos
+   npm run start:dev
+   ```
 
-```bash
-# unit tests
-$ npm run test
+3. **Configurar el Frontend**
+   ```bash
+   cd ../Frontend
+   npm install
+   ng serve
+   ```
 
-# e2e tests
-$ npm run test:e2e
+4. **Acceder a la aplicación**
+   - Frontend: http://localhost:4000
+   - API Backend: http://localhost:3001
 
-# test coverage
-$ npm run test:cov
-```
+## Despliegue en Producción
 
-## Deployment
+El proyecto está desplegado en Render con la siguiente configuración:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- **Frontend**: Aplicación Angular compilada y servida como sitio estático
+- **Backend**: Webservice (NestJS)
+- **Base de Datos**: PostgreSQL
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### URLs de Producción
+- Frontend:
+- Backend API: 
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+## Documentación Detallada
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Para documentación más detallada, consulte:
 
-## Resources
+- [Documentación del Frontend](./Frontend/docs/index.html) 
+- [Documentación de la API](./backend/docs/api.html) 
 
-Check out a few resources that may come in handy when working with NestJS:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Documentación de la API con Swagger
+La documentación de la API está disponible en:
+- Desarrollo local: http://localhost:3001/api
+- Producción: https://cafetea-peru-api.onrender.com/api
 
-## Stay in touch
+## Licencia
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Este proyecto está licenciado bajo [Licencia MIT](LICENSE)
 
-## License
+## Contacto
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Para más información, contactar a:
+- Nombre: Jair Rivas
+- Email: d.jair.rivas.n@gmail.com
