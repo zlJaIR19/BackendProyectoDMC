@@ -12,7 +12,7 @@ El proyecto está construido con una arquitectura de tres capas:
 2. **Backend**: API RESTful desarrollada con NestJS
 3. **Base de Datos**: PostgreSQL alojada en Render
 
-![Arquitectura del Proyecto](./docs/arquitectura.png)
+![Arquitectura del Proyecto][https://github.com/zlJaIR19/frontendProyectoDMC/blob/main/documentacion/arquitectura.txt]
 
 ## Tecnologías Utilizadas
 
@@ -109,9 +109,8 @@ El proyecto está desplegado en Render con la siguiente configuración:
 - **Base de Datos**: PostgreSQL
 
 ### URLs de Producción
-- Frontend:
-- Backend API: 
-
+- Frontend: https://frontendproyectodmc.onrender.com
+- Backend API: https://backendproyectodmc.onrender.com
 ## Licencia
 
 Este proyecto está licenciado bajo [Licencia MIT](LICENSE)
