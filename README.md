@@ -12,7 +12,7 @@ El proyecto está construido con una arquitectura de tres capas:
 2. **Backend**: API RESTful desarrollada con NestJS
 3. **Base de Datos**: PostgreSQL alojada en Render
 
-![Arquitectura del Proyecto][https://github.com/zlJaIR19/frontendProyectoDMC/blob/main/documentacion/arquitectura.txt]
+![Arquitectura del Proyecto][https://github.com/zlJaIR19/BackendProyectoDMC/blob/main/documentacion/arquitectura.txt]
 
 ## Tecnologías Utilizadas
 
