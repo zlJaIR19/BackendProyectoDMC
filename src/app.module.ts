@@ -24,9 +24,7 @@ import { DetalleOrden } from './entities/detalle-orden.entity';
       ...(process.env.DATABASE_URL
         ? {
             url: process.env.DATABASE_URL,
-            ssl: process.env.NODE_ENV === 'production' 
-              ? { rejectUnauthorized: false } 
-              : false,
+            ssl: { rejectUnauthorized: false },
           }
         : {
             host: process.env.DATABASE_HOST || 'localhost',
